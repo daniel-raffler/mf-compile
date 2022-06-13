@@ -11,5 +11,28 @@ module Main where
 
 import Lib
 
+{-
+Programm ::= Definition ";" { Definition ";"} .
+Definition ::= Variable {Variable} "=" Ausdruck .
+
+Lokaldefinitionen ::= Lokaldefinition { ";" Lokaldefinition } .
+Lokaldefinition ::= Variable "=" Ausdruck .
+
+Ausdruck
+  ::= "let" Lokaldefinitionen "in" Ausdruck
+    | "if" Ausdruck "then" Ausdruck "else" Ausdruck
+    | Ausdruck BinärOp Ausdruck
+    | UnärOp Ausdruck
+    | Ausdruck Ausdruck
+    | "(" Ausdruck ")"
+    | AtomarerAusdruck.
+
+BinärOp ::= "&" | "|" | "==" | "<" | "+" | "−" | "∗" | "/" .
+UnärOp ::=  "not" | "−" .
+
+AtomarerAusdruck ::= Variable | Zahl | Wahrheitswert .
+Variable ::= Name .
+-}
+
 main :: IO ()
 main = someFunc
