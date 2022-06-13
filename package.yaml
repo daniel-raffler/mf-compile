@@ -1,6 +1,6 @@
 name:                mf-compile
 version:             0.1.0.0
-github:              "github.com/daniel-raffler/mf-compile"
+github:              "daniel-raffler/mf-compile"
 license:             OtherLicense
 author:              "Daniel Raffler"
 maintainer:          "daniel-raffler@gmx.de"
