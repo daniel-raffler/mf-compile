@@ -183,25 +183,37 @@ shiftBy env i = Map.fromList
   [(k,v+i) | (k,v) <- Map.assocs env]
 
 genPre :: Text -> [Text] -> [CForm]
-genPre fx args = [entry, unary, binary, ite]
+genPre fx args = [entry, ite, unary, binary]
   where apply a ops = [Pushfun a] ++ ops ++ [Makeapp]
         
-        entry = CForm ".entry" 0 $
+        entry = CForm "@entry" 0 $
           [Reset] ++
           foldr apply [Pushfun fx] args ++
           [Unwind,
            Call,
            Halt]
         
-        unary = CForm ".unary" 1 $
+        ite = CForm "@ite" (-1) $
+          [Pushparam 1,
+           Unwind,
+           Call,
+           Operator (-1),
+           Update 0,
+           Slide 1,
+           Unwind,
+           Call,
+           Return]
+        
+        unary = CForm "@unary" 1 $
           [Pushparam 2,
            Unwind,
            Call,
            Operator 1,
-           Update (-1),
+           Update 0,
+           Slide 1,
            Return]
         
-        binary = CForm ".binary" 2 $
+        binary = CForm "@binary" 2 $
           [Pushparam 2,
            Unwind,
            Call,
@@ -209,17 +221,8 @@ genPre fx args = [entry, unary, binary, ite]
            Unwind,
            Call,
            Operator 2,
-           Update (-1),
-           Return]
-        
-        ite = CForm ".ite" 3 $
-          [Pushparam 1,
-           Unwind,
-           Call,
-           Operator (-1),
-           Update (-1),
-           Unwind,
-           Call,
+           Update 0,
+           Slide 1,
            Return]
 
 genExpr :: Expr -> Map Id Int -> [Opcode]
