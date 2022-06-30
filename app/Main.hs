@@ -188,7 +188,7 @@ genPre fx args = [entry, ite, unary, binary]
         
         entry = CForm "@entry" 0 $
           [Reset] ++
-          foldr apply [Pushfun fx] args ++
+          foldr apply [Pushfun fx] (reverse args) ++
           [Unwind,
            Call,
            Halt]
