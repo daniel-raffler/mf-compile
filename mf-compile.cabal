@@ -23,17 +23,6 @@ source-repository head
   type: git
   location: https://github.com/daniel-raffler/mf-compile
 
-library
-  exposed-modules:
-      Lib
-  other-modules:
-      Paths_mf_compile
-  hs-source-dirs:
-      src
-  build-depends:
-      base >=4.7 && <5
-  default-language: Haskell2010
-
 executable mf-compile-exe
   main-is: Main.hs
   other-modules:
@@ -43,18 +32,10 @@ executable mf-compile-exe
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
-    , mf-compile
-  default-language: Haskell2010
-
-test-suite mf-compile-test
-  type: exitcode-stdio-1.0
-  main-is: Spec.hs
-  other-modules:
-      Paths_mf_compile
-  hs-source-dirs:
-      test
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      base >=4.7 && <5
-    , mf-compile
+    , containers
+    , filepath
+    , megaparsec
+    , mf-library
+    , optparse-applicative
+    , text
   default-language: Haskell2010
